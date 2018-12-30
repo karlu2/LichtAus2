@@ -47,6 +47,7 @@ class Lichtsteuerung(object):
     # --> Master callback function, triggered everytime an intent is recognized
     def Lichtsteuerung_master_intent_callback(self,hermes, intent_message):
         coming_intent = intent_message.intent.intent_name
+        print '[Received] intent Master: {}'.format(intent_message.intent.intent_name)
         if coming_intent == 'LichtAus':
             self.LichtAus_callback(hermes, intent_message)
 #        if coming_intent == 'intent_2':
