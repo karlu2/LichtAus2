@@ -61,4 +61,4 @@ class Lichtsteuerung2(object):
             h.subscribe_intents(self.Lichtsteuerung2_master_intent_callback).start()
 
 if __name__ == "__main__":
-    main()
+    Lichtsteuerung2()
