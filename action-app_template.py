@@ -15,7 +15,7 @@ MQTT_IP_ADDR = "192.168.178.46"
 MQTT_PORT = 1883
 MQTT_ADDR = "{}:{}".format(MQTT_IP_ADDR, str(MQTT_PORT))
 
-class Lichtsteuerung(object):
+class Lichtsteuerung2(object):
     """Class used to wrap action code with mqtt connection
         
         Please change the name refering to your application
@@ -32,7 +32,7 @@ class Lichtsteuerung(object):
         self.start_blocking()
         
     # --> Sub callback function, one per intent
-    def LichtAus_callback(self, hermes, intent_message):
+    def LichtAus2_callback(self, hermes, intent_message):
         # close the session first by sending an empty string
         hermes.publish_end_session(intent_message.session_id, "")
         
@@ -45,11 +45,11 @@ class Lichtsteuerung(object):
     # More callback function goes here...
 
     # --> Master callback function, triggered everytime an intent is recognized
-    def Lichtsteuerung_master_intent_callback(self,hermes, intent_message):
+    def Lichtsteuerung2_master_intent_callback(self,hermes, intent_message):
         coming_intent = intent_message.intent.intent_name
         print '[Received] intent Master: {}'.format(intent_message.intent.intent_name)
-        if coming_intent == 'LichtAus':
-            self.LichtAus_callback(hermes, intent_message)
+        if coming_intent == 'LichtAus2':
+            self.LichtAus2_callback(hermes, intent_message)
 #        if coming_intent == 'intent_2':
  #           self.intent_2_callback(hermes, intent_message)
 
@@ -58,7 +58,7 @@ class Lichtsteuerung(object):
     # --> Register callback function and start MQTT
     def start_blocking(self):
         with Hermes(MQTT_ADDR) as h:
-            h.subscribe_intents(self.Lichtsteuerung_master_intent_callback).start()
+            h.subscribe_intents(self.Lichtsteuerung2_master_intent_callback).start()
 
 if __name__ == "__main__":
     main()
