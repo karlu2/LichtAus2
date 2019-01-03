@@ -37,22 +37,21 @@ class Lichtsteuerung2(object):
         hermes.publish_end_session(intent_message.session_id, "")
         
         # action code goes here...
-        print '[Received] intent: {}'.format(intent_message.intent.intent_name)
-
+        house_room = intentMessage.slots.Wohnraum.first().value # We extract the value from the slot "Wohnraum"
+        result_sentence = "Licht aus : {}".format(str(house_room))
+        
         # if need to speak the execution result by tts
-        hermes.publish_start_session_notification(intent_message.site_id, "Action1 has been done", "")
+        hermes.publish_start_session_notification(intent_message.site_id, result_sentence, "")
 
     # More callback function goes here...
 
     # --> Master callback function, triggered everytime an intent is recognized
     def Lichtsteuerung2_master_intent_callback(self,hermes, intent_message):
         coming_intent = intent_message.intent.intent_name
-        print 'Hallo'
         if coming_intent == 'karlu:LichtAus2':
             self.LichtAus2_callback(hermes, intent_message)
 #        if coming_intent == 'intent_2':
  #           self.intent_2_callback(hermes, intent_message)
-
         # more callback and if condition goes here...
 
     # --> Register callback function and start MQTT
