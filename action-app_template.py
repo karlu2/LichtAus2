@@ -38,7 +38,9 @@ class Lichtsteuerung2(object):
         
         # action code goes here...
         house_room = intent_message.slots.Wohnraum.first().value # We extract the value from the slot "Wohnraum"
-        result_sentence = "Licht aus : {}".format(str(house_room))
+        light_cmd = intent_message.slots.LightCmd.first().value # We extract the value from the slot "LightCmd"
+        result_sentence = "Licht {}".format(str(light_cmd))
+        result_sentence = result_sentence + (" : {}".format(str(house_room)))
         
         # if need to speak the execution result by tts
         hermes.publish_start_session_notification(intent_message.site_id, result_sentence, "")
